@@ -28,7 +28,7 @@ const Footer = () => {
     <footer className="bg-green-light text-green-dark h-[90px] mt-auto">
       <div className="w-4/5 h-full mx-auto px-3.5 flex justify-between items-center">
         <Link
-          href="/help-center"
+          href="/contact"
           className="md:text-xl font-medium md:pr-4 md:border-r-2 md:border-green-dark"
         >
           聯絡我們

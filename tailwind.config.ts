@@ -14,6 +14,7 @@ const config: Config = {
         "light-40": "rgb(251, 249, 252, .4)",
         green: {
           dark: "#206A5D",
+          "dark-40": "rgb(32, 106, 93, .4)",
           light: "#C2E662",
           normal: "#80B214",
         },
