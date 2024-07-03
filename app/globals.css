@@ -19,5 +19,13 @@ textarea:focus {
   -webkit-box-orient: vertical;
 }
 
+.description-lime-clamp-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 @layer utilities {
 }
