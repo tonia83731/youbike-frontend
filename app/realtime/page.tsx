@@ -10,8 +10,29 @@ const Realtime = () => {
         即時動態
       </h1>
       <div className="">
-        <div className="md:grid md:grid-cols-3">
-          <StopSearch />
+        <div className="md:grid md:grid-cols-2 md:gap-8 items-center">
+          <div className="flex flex-col gap-4">
+            <div className="">
+              <StopSearch />
+            </div>
+            <div className="bg-gray-50 w-full h-48">
+              <Image
+                src="/realtime/example-map.jpg"
+                alt="realtime"
+                width={300}
+                height={300}
+                className="w-full h-full object-cover"
+              ></Image>
+            </div>
+          </div>
+          <div className="hidden md:block">
+            <Image
+              src="/realtime/realtime.png"
+              alt="realtime"
+              width={750}
+              height={260}
+            ></Image>
+          </div>
         </div>
         <StopTable />
       </div>

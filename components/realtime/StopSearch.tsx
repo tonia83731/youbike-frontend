@@ -2,8 +2,8 @@ import { FaSearch } from "react-icons/fa";
 
 const StopSearch = () => {
   return (
-    <div className="md:col-start-3 flex gap-2 w-full">
-      <div className="relative w-4/5 md:w-4/6">
+    <div className="flex gap-2 w-full">
+      <div className="relative w-2/3">
         <input
           type="text"
           className="w-full h-10 leading-10 px-4 rounded-md bg-green-light text-green-dark placeholder:text-green-dark-40"
@@ -13,7 +13,7 @@ const StopSearch = () => {
           <FaSearch />
         </button>
       </div>
-      <button className="w-1/5 md:w-2/6 bg-green-normal px-2 rounded-md text-light hover:drop-shadow-md hover:text-green-dark">
+      <button className="w-1/3 md:w-2/6 bg-green-normal px-2 rounded-md text-light hover:drop-shadow-md hover:text-green-dark">
         <div className="">目前位置</div>
       </button>
     </div>
