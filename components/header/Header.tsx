@@ -1,16 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
 import Select from "react-select";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { MdPedalBike } from "react-icons/md";
 import Logo from "@/public/Logo.png";
-import { twCity } from "@/datas/twCity";
 import { useState } from "react";
-
+import { useCityStore } from "@/store/cityStore";
 const navlinks = [
   {
     id: "home",
@@ -33,7 +31,9 @@ const Header = () => {
   //   const router = useRouter();
   const [isToggle, setIsToggle] = useState(false);
   const pathname = usePathname();
-  const cityOptions = twCity();
+  // const cityOptions = twCity();
+  const { selectedCity, setSelectedCity, cityOptions } = useCityStore();
+  // console.log(selectedCity);
   return (
     <header className="bg-light drop-shadow-md h-[60px] md:h-[100px] px-3.5 py-2.5 w-4/5 fixed top-[30px] left-1/2 -translate-x-1/2 z-[999]">
       <div className="flex justify-between items-center h-full">
@@ -90,9 +90,10 @@ const Header = () => {
           <div className="flex gap-4 items-center">
             <Select
               options={cityOptions}
+              value={selectedCity}
+              onChange={setSelectedCity}
               isClearable={false}
               isSearchable={false}
-              defaultValue={cityOptions[1]}
               styles={{
                 control: (baseStyles, state) => ({
                   ...baseStyles,
