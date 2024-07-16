@@ -7,7 +7,7 @@ const NewsCard = (props: NewsCardProps) => {
   const { image, title, description, href, date } = props;
   const published_date = dayjs(date).format("YYYY-MM-DD");
   return (
-    <Link href={href}>
+    <Link href={`/news/${href}`}>
       <div className="flex items-top gap-4 md:flex-col md:gap-0">
         <div className="w-1/4 h-24 md:w-full md:h-48">
           <Image

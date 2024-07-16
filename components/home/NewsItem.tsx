@@ -10,7 +10,7 @@ export type NewsItemProps = {
 const NewsItem = (props: NewsItemProps) => {
   const { image, title, description, href } = props;
   return (
-    <Link href={href}>
+    <Link href={`/news/${href}`}>
       <div className="flex items-top gap-4 md:flex-col md:gap-0 md:h-full">
         <div className="w-1/4 md:w-full md:h-48 md:object-cover">
           <Image
