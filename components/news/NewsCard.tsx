@@ -9,13 +9,13 @@ const NewsCard = (props: NewsCardProps) => {
   return (
     <Link href={href}>
       <div className="flex items-top gap-4 md:flex-col md:gap-0">
-        <div className="w-1/4 md:w-full md:h-48 md:object-cover">
+        <div className="w-1/4 h-24 md:w-full md:h-48">
           <Image
             src={image}
             alt={title}
             width={400}
             height={225}
-            className="md:w-full md:h-full rounded-md"
+            className="w-full h-full object-cover rounded-md"
           ></Image>
         </div>
         <div className="w-3/4 md:w-full  md:px-2 md:pt-4 md:pb-6">
