@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsItemProps } from "../home/NewsItem";
+import dayjs from "dayjs";
 export type NewsCardProps = NewsItemProps & { date: string };
 const NewsCard = (props: NewsCardProps) => {
   const { image, title, description, href, date } = props;
+  const published_date = dayjs(date).format("YYYY-MM-DD");
   return (
     <Link href={href}>
       <div className="flex items-top gap-4 md:flex-col md:gap-0">
@@ -17,14 +19,14 @@ const NewsCard = (props: NewsCardProps) => {
           ></Image>
         </div>
         <div className="w-3/4 md:w-full  md:px-2 md:pt-4 md:pb-6">
-          <h4 className="font-bold text-xl text-dark mb-2 md:text-3xl hover:underline hover:underline-offset-2">
+          <h4 className="font-bold text-xl text-dark mb-2 md:text-2xl md:truncate hover:underline hover:underline-offset-2">
             {title}
           </h4>
           <p className="text-xs text-slate-500 description-lime-clamp-2 md:text-base my-2">
             {description}
           </p>
           <p className="text-xs text-slate-500 md:text-base">
-            發布日期: {date}
+            發布日期: {published_date}
           </p>
         </div>
       </div>

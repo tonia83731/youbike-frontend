@@ -22,7 +22,7 @@ const NewsItem = (props: NewsItemProps) => {
           ></Image>
         </div>
         <div className="w-3/4 md:w-full md:bg-light md:px-2 md:pt-4 md:pb-6 md:drop-shadow-md">
-          <h4 className="font-bold text-xl text-dark mb-4 md:text-3xl">
+          <h4 className="font-bold text-xl text-dark mb-4 md:text-2xl md:truncate">
             {title}
           </h4>
           <p className="text-xs text-slate-500 description-lime-clamp md:text-base">
