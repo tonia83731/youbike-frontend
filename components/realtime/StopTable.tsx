@@ -10,7 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-
+import { useCityStore } from "@/store/cityStore";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
@@ -19,43 +19,57 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const headTableData = [
   ["StationName", "站點名稱"],
   ["StationAddress", "站點地址"],
-  ["AvailableRentBikes", "可借車輛"],
+  ["AvailableRenGenerBikes", "可借車輛(一般)"],
+  ["AvailableRentElecBikes", "可借車輛(電動)"],
   ["AvailableReturnBikes", "可還空位"],
 ];
-const StopTable = () => {
+const StopTable = ({ tableData }: { tableData: any[] }) => {
+  const { setNewPosition, setNewTag } = useCityStore();
   const [sorting, setIsSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 20,
   });
+  const handlePositionClick = (position: any, stationName: string) => {
+    console.log(position, stationName);
+    const centerPosition: [number, number] = [
+      position.PositionLat,
+      position.PositionLon,
+    ];
+    setNewPosition(centerPosition);
+    setNewTag(stationName)
+  };
   const columnHelper = createColumnHelper<any>();
   const columns = headTableData.map((head: string[]) =>
     columnHelper.accessor(head[0], {
       header: () => <span className="">{head[1]}</span>,
-      cell: (info: any) => <span className="">{info.getValue()}</span>,
+      cell: (info: any) => {
+        const stationPosition = info.row.original.StationPosition;
+        const stationName = info.row.original.StationName;
+        if (head[0] === "StationAddress") {
+          return (
+            <button
+              className="px-2 py-1 rounded hover:text-green-dark"
+              onClick={() => handlePositionClick(stationPosition, stationName)}
+            >
+              {info.getValue()}
+            </button>
+          );
+        }
+        return (
+          <span
+            className={
+              head[0] === "StationPosition" ? "font-bold text-orange" : ""
+            }
+          >
+            {info.getValue()}
+          </span>
+        );
+      },
     })
   );
   const table = useReactTable({
-    data: [
-      {
-        StationName: "station",
-        StationAddress: "address",
-        AvailableRentBikes: 0,
-        AvailableReturnBikes: 0,
-      },
-      {
-        StationName: "station",
-        StationAddress: "address",
-        AvailableRentBikes: 0,
-        AvailableReturnBikes: 0,
-      },
-      {
-        StationName: "station",
-        StationAddress: "address",
-        AvailableRentBikes: 0,
-        AvailableReturnBikes: 0,
-      },
-    ],
+    data: tableData,
     columns,
     state: {
       sorting,
@@ -77,7 +91,7 @@ const StopTable = () => {
             return (
               <tr
                 key={`station-${headerGroup.id}`}
-                className={`w-full grid grid-cols-4 md:grid-cols-6`}
+                className={`w-full grid grid-cols-5 md:grid-cols-7`}
               >
                 {headerGroup.headers.map((header, index) => {
                   return (
@@ -114,7 +128,7 @@ const StopTable = () => {
               return (
                 <tr
                   key={row.id}
-                  className={`w-full grid grid-cols-4 md:grid-cols-6 py-4 ${
+                  className={`w-full grid grid-cols-5 md:grid-cols-7 py-4 ${
                     index % 2 === 1 ? "bg-green-dark-20" : ""
                   }`}
                 >

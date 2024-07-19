@@ -13,9 +13,9 @@ const StopSearch = () => {
           <FaSearch />
         </button>
       </div>
-      <button className="w-1/3 md:w-2/6 bg-green-normal px-2 rounded-md text-light hover:drop-shadow-md hover:text-green-dark">
+      {/* <button className="w-1/3 md:w-2/6 bg-green-normal px-2 rounded-md text-light hover:drop-shadow-md hover:text-green-dark">
         <div className="">目前位置</div>
-      </button>
+      </button> */}
     </div>
   );
 };
