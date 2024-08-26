@@ -17,6 +17,10 @@ const NewsList = () => {
   const pagesArr = new Array(pageLength).fill(0).map((_, index) => index + 1);
   const startIndex = (currPage - 1) * itemPerPage;
   const endIndex = startIndex + itemPerPage;
+
+  const loadingArr = new Array(itemPerPage)
+    .fill(0)
+    .map((_, index) => index + 1);
   const handleNumClick = (page: number) => {
     if (page === currPage) return;
     setCurrPage(page);
@@ -28,30 +32,28 @@ const NewsList = () => {
   useEffect(() => {
     const fetchNews = async () => {
       setIsLoading(true);
-      const NewsData = await client.fetch(
-        `*[_type == "news" && isPublished == true]| order(publishedAt desc)[${startIndex}...${endIndex}]{
-            title,
-            "description": short,
-            "href": slug.current,
-            "image": image.asset->url,
-            "date": publishedAt,
-          }`
-      );
-      if (NewsData.length > 0) setIsLoading(false);
-      setAllNews(NewsData);
-      // if (NewsData.length < visibleCount) {
-      //   setHasMore(false);
-      // }
-    };
-    const fetchNewsCount = async () => {
-      const count = await client.fetch(`count(*[
-        _type == "news" && isPublished == true
-      ])`);
-      setNewsCount(count);
+      try {
+        const res = await fetch(
+          `/api/news?startIndex=${startIndex}&endIndex=${endIndex}`
+        );
+        const data = await res.json();
+        setAllNews(data?.newsData);
+        setNewsCount(data?.newsCount);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchNews();
-    fetchNewsCount();
   }, [currPage, startIndex, endIndex]);
+  useEffect(() => {
+    const handleScreenSize = () => {
+      if (window.innerWidth < 768) setItemPerPage(6);
+      else setItemPerPage(12);
+    };
+    window.addEventListener("resize", handleScreenSize);
+  }, []);
   //   console.log(allNews);
   if (isLoading) {
     return (
@@ -60,7 +62,7 @@ const NewsList = () => {
           最新消息
         </h1>
         <div className="flex flex-col gap-4 md:grid md:grid-cols-3">
-          {[1, 2, 3, 4, 5, 6].map((data) => {
+          {loadingArr.map((data) => {
             return (
               <>
                 <NewsLoading key={data} />
