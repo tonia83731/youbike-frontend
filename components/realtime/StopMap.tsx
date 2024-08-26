@@ -6,7 +6,6 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import { useCityStore } from "@/store/cityStore";
 const StopMap = () => {
   const { centerPosition, zoom, MarkerTag } = useCityStore();
-
   return (
     <MapContainer
       className="w-full h-full"

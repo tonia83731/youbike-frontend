@@ -19,7 +19,7 @@ const Realtime = () => {
       </h1>
       <div className="">
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-          <div className="w-full h-[350px]">
+          <div className="w-full h-[250px]">
             <StopMap />
           </div>
           <Image

@@ -12,6 +12,15 @@ import dayjs from "dayjs";
 import { MdOutlinePublishedWithChanges } from "react-icons/md";
 import { MdEvent } from "react-icons/md";
 import Image from "next/image";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LineIcon,
+  LineShareButton,
+  EmailIcon,
+  EmailShareButton,
+} from "next-share";
+
 type DetailPageProps = {
   title: string;
   body: any;
@@ -150,6 +159,30 @@ const NewsDetailPage = ({ params }: { params: { slug: string } }) => {
   return (
     <main className="flex flex-col gap-8">
       <h1 className="font-bold text-3xl text-dark mb-4">{slugData.title}</h1>
+      <div className="flex gap-2 items-center">
+        <FacebookShareButton
+          url={`https://www.google.com/`}
+          title={slugData.title}
+          // quote={
+          //   "next-share is a social share buttons for your next React apps."
+          // }
+          hashtag={`#${slugData.title}`}
+        >
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        <LineShareButton
+          url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${params.slug}`}
+          title={slugData.title}
+        >
+          <LineIcon size={32} round />
+        </LineShareButton>
+        <EmailShareButton
+          url={`${process.env.NEXT_PUBLIC_BASE_URL}/news/${params.slug}`}
+          subject={slugData.title}
+        >
+          <EmailIcon size={32} round />
+        </EmailShareButton>
+      </div>
       <div className="text-green-dark md:text-lg">
         <div className="flex gap-2 items-center">
           <div className="text-xl">

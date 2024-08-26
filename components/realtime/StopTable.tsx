@@ -31,13 +31,12 @@ const StopTable = ({ tableData }: { tableData: any[] }) => {
     pageSize: 20,
   });
   const handlePositionClick = (position: any, stationName: string) => {
-    console.log(position, stationName);
     const centerPosition: [number, number] = [
       position.PositionLat,
       position.PositionLon,
     ];
     setNewPosition(centerPosition);
-    setNewTag(stationName)
+    setNewTag(stationName);
   };
   const columnHelper = createColumnHelper<any>();
   const columns = headTableData.map((head: string[]) =>
@@ -56,15 +55,7 @@ const StopTable = ({ tableData }: { tableData: any[] }) => {
             </button>
           );
         }
-        return (
-          <span
-            className={
-              head[0] === "StationPosition" ? "font-bold text-orange" : ""
-            }
-          >
-            {info.getValue()}
-          </span>
-        );
+        return <span className="">{info.getValue()}</span>;
       },
     })
   );
